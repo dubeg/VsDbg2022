@@ -1,38 +1,77 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 
-  <Extern href="stdidcmd.h"/>
-  <Extern href="vsshlids.h"/>
-  <Include href="KnownImageIds.vsct"/>
-  <Include href="VSGlobals.vsct"/>
+	<Extern href="stdidcmd.h"/>
+	<Extern href="vsshlids.h"/>
+	<Include href="KnownImageIds.vsct"/>
+	<Include href="VSGlobals.vsct"/>
 
-  <Commands package="VsDbg">
-    <Groups>
-      <Group guid="VsDbg" id="MainCmdGroup" priority="0x0600">
-        <Parent guid="VSMainMenu" id="Tools"/>
-      </Group>
-    </Groups>
+	<Commands package="VsDbg">
+		<Groups>
+			<Group guid="VsDbg" id="MainCmdGroup" priority="0x0600">
+				<Parent guid="VSMainMenu" id="Tools"/>
+			</Group>
+		</Groups>
+		<Buttons>
 
-    <!--This section defines the elements the user can interact with, like a menu command or a button
-        or combo box in a toolbar. -->
-    <Buttons>
-      <Button guid="VsDbg" id="ToggleJSDebugging" priority="0x0100" type="Button">
-        <Parent guid="VsDbg" id="MainCmdGroup" />
-        <Icon guid="ImageCatalogGuid" id="StatusInformation" />
-        <CommandFlag>IconIsMoniker</CommandFlag>
-        <Strings>
-          <ButtonText>Toggle JavaScript debugging</ButtonText>
-          <LocCanonicalName>.Debug.ToggleJSDebugging</LocCanonicalName>
-          <CanonicalName>.Debug.ToggleJSDebugging</CanonicalName>
-        </Strings>
-      </Button>
-    </Buttons>
-  </Commands>
+			<Button guid="VsDbg" id="ToggleJSDebugging" priority="0x0100" type="Button">
+				<Parent guid="VsDbg" id="MainCmdGroup" />
+				<Icon guid="ImageCatalogGuid" id="StatusInformation" />
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>CommandWellOnly</CommandFlag>
+				<Strings>
+					<ButtonText>Toggle JavaScript debugging</ButtonText>
+					<LocCanonicalName>.VsDbg.ToggleJSDebugging</LocCanonicalName>
+					<CanonicalName>.VsDbg.ToggleJSDebugging</CanonicalName>
+				</Strings>
+			</Button>
 
-  <Symbols>
-    <GuidSymbol name="VsDbg" value="{bbda3f82-23d0-4ed9-8244-3701c4042139}">
-      <IDSymbol name="MainCmdGroup" value="0x0001" />
-      <IDSymbol name="ToggleJSDebugging" value="0x0100" />
-    </GuidSymbol>
-  </Symbols>
+			<Button guid="VsDbg" id="ToggleJustMyCode" priority="0x0100" type="Button">
+				<Parent guid="VsDbg" id="MainCmdGroup" />
+				<Icon guid="ImageCatalogGuid" id="JustMyCode" />
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>CommandWellOnly</CommandFlag>
+				<Strings>
+					<ButtonText>Toggle Just My Code</ButtonText>
+					<LocCanonicalName>.VsDbg.ToggleJustMyCode</LocCanonicalName>
+					<CanonicalName>.VsDbg.ToggleJustMyCode</CanonicalName>
+				</Strings>
+			</Button>
+
+			<Button guid="VsDbg" id="ToggleXamlHotReload" priority="0x0100" type="Button">
+				<Parent guid="VsDbg" id="MainCmdGroup" />
+				<Icon guid="ImageCatalogGuid" id="StatusInformation" />
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>CommandWellOnly</CommandFlag>
+				<Strings>
+					<ButtonText>Toggle Just My Code</ButtonText>
+					<LocCanonicalName>.VsDbg.ToggleXamlHotReload</LocCanonicalName>
+					<CanonicalName>.VsDbg.ToggleXamlHotReload</CanonicalName>
+				</Strings>
+			</Button>
+
+			<Button guid="VsDbg" id="ToggleCodeLens" priority="0x0100" type="Button">
+				<Parent guid="VsDbg" id="MainCmdGroup" />
+				<Icon guid="ImageCatalogGuid" id="StatusInformation" />
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>CommandWellOnly</CommandFlag>
+				<Strings>
+					<ButtonText>Toggle Just My Code</ButtonText>
+					<LocCanonicalName>.VsDbg.ToggleCodeLens</LocCanonicalName>
+					<CanonicalName>.VsDbg.ToggleCodeLens</CanonicalName>
+				</Strings>
+			</Button>
+
+		</Buttons>
+	</Commands>
+
+	<Symbols>
+		<GuidSymbol name="VsDbg" value="{bbda3f82-23d0-4ed9-8244-3701c4042139}">
+			<IDSymbol name="MainCmdGroup" value="0x0001" />
+			<IDSymbol name="ToggleJSDebugging" value="0x0100" />
+			<IDSymbol name="ToggleJustMyCode" value="0x0200" />
+			<IDSymbol name="ToggleXamlHotReload" value="0x0300" />
+			<IDSymbol name="ToggleCodeLens" value="0x0400" />
+		</GuidSymbol>
+	</Symbols>
 </CommandTable>
