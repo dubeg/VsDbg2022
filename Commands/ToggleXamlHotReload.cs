@@ -14,17 +14,24 @@ internal sealed class ToggleXamlHotReload : BaseCommand<ToggleXamlHotReload> {
     protected override async Task ExecuteAsync(OleMenuCmdEventArgs e) {
         try {
             await Package.JoinableTaskFactory.SwitchToMainThreadAsync();
-            //var enabled = await SettingsUtils.ToggleAsync(Package, SettingsScope.UserSettings, "Debugger", "EnableXamlVisualDiagnostics");
-            //await SettingsUtils.ToggleAsync(Package, SettingsScope.UserSettings, "Debugger", "XamlVisualDiagnosticsIsUwpEnabled");
-            //await SettingsUtils.SetBoolAsync(Package, SettingsScope.UserSettings, "Debugger", "XamlVisualDiagnosticsIsWinUIEnabled", enabled);
-            //await SettingsUtils.SetBoolAsync(Package, SettingsScope.UserSettings, "Debugger", "XamlVisualDiagnosticsIsWpfEnabled", enabled);
-            //await SettingsUtils.SetBoolAsync(Package, SettingsScope.UserSettings, "XamarinHotReloadVSIX", "FormsHotReloadEnabled", enabled);
-            //await SettingsUtils.SetBoolAsync(Package, SettingsScope.UserSettings, "XamarinHotReloadVSIX", "MAUIHotReloadEnabled", enabled);
             
             var debugger = await Package.GetServiceAsync<SVsShellDebugger, IDebuggerInternal>();
             debugger.GetDebuggerOption(DEBUGGER_OPTIONS.Option_EnableXamlVisualDiagnostics, out var iEnabled);
             iEnabled = (uint)(iEnabled == 1 ? 0 : 1);
             debugger.SetDebuggerOption(DEBUGGER_OPTIONS.Option_EnableXamlVisualDiagnostics, iEnabled);
+            
+            // Using the code below doesn't take effect until Visual Studio restarts,
+            // so I went ahead and use the code above.
+            // Strangely enough, the code above works OK, but the Tools -> Options doesn't reflect the change 
+            // until the second showing.
+
+            //var enabled = Convert.ToBoolean(iEnabled);
+            //await SettingsUtils.SetBoolAsync(Package, SettingsScope.UserSettings, "Debugger", "EnableXamlVisualDiagnostics", enabled);
+            //await SettingsUtils.SetBoolAsync(Package, SettingsScope.UserSettings, "Debugger", "XamlVisualDiagnosticsIsUwpEnabled", enabled);
+            //await SettingsUtils.SetBoolAsync(Package, SettingsScope.UserSettings, "Debugger", "XamlVisualDiagnosticsIsWinUIEnabled", enabled);
+            //await SettingsUtils.SetBoolAsync(Package, SettingsScope.UserSettings, "Debugger", "XamlVisualDiagnosticsIsWpfEnabled", enabled);
+            //await SettingsUtils.SetBoolAsync(Package, SettingsScope.UserSettings, "XamarinHotReloadVSIX", "FormsHotReloadEnabled", enabled);
+            //await SettingsUtils.SetBoolAsync(Package, SettingsScope.UserSettings, "XamarinHotReloadVSIX", "MAUIHotReloadEnabled", enabled);
 
             // This won't take be shown in the options page until the second showing.
             // --
