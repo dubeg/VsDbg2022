@@ -10,7 +10,7 @@ namespace VsDbg.Commands;
 [Command(PackageIds.ToggleCodeLens)]
 internal sealed class ToggleCodeLens : BaseCommand<ToggleCodeLens> {
     protected override async Task ExecuteAsync(OleMenuCmdEventArgs e) {
-        await SettingsUtils.ToggleRoamingWithStatusAsync(
+        await Utils.ToggleRoamingWithStatusAsync(
             Package,
             "TextEditorGlobalOptions",
             "IsCodeLensEnabled",

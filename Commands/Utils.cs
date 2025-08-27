@@ -12,10 +12,11 @@ using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell.Settings;
 using SettingsStoreExplorer;
+using MessageBox = Community.VisualStudio.Toolkit.MessageBox;
 
 namespace VsDbg.Commands;
 
-public static class SettingsUtils {
+public static class Utils {
 
     public static async Task SetBoolAsync(AsyncPackage package, SettingsScope scope, string collectionPath, string propertyName, bool enabled) {
         await package.JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -55,9 +56,7 @@ public static class SettingsUtils {
             await package.JoinableTaskFactory.SwitchToMainThreadAsync();
             var enabled = await ToggleAsync(package, scope, collectionPath, propertyName);
             // --
-            await VS.StatusBar.ShowMessageAsync($"{statusDisplayName}: {(enabled ? "enabled" : "disabled")}");
-            await Task.Delay(1000);
-            await VS.StatusBar.ShowMessageAsync(null);
+            await package.SetStatusThenClearAsync($"{statusDisplayName}: {(enabled ? "enabled" : "disabled")}");
         }
         catch (Exception ex) {
             await VS.MessageBox.ShowErrorAsync("Error", $"Failed to toggle option: {ex.Message}");
@@ -103,12 +102,30 @@ public static class SettingsUtils {
                 await roamingSettings.SetUInt32Async(collectionPath, propertyName, iEnabled);
             }
             // --
-            await VS.StatusBar.ShowMessageAsync($"{statusDisplayName}: {(enabled ? "enabled" : "disabled")}");
-            await Task.Delay(1000);
-            await VS.StatusBar.ShowMessageAsync(null);
+            await package.SetStatusThenClearAsync($"{statusDisplayName}: {(enabled ? "enabled" : "disabled")}");
         }
         catch (Exception ex) {
             await VS.MessageBox.ShowErrorAsync("Error", $"Failed to toggle option: {ex.Message}");
+        }
+    }
+
+    public static async Task SetStatusThenClearAsync(this AsyncPackage package, string message)
+    => await SetStatusThenClearAsync(package, message, TimeSpan.FromSeconds(3));
+
+    public static async Task SetStatusThenClearAsync(this AsyncPackage package, string message, TimeSpan duration) {
+        await package.JoinableTaskFactory.SwitchToMainThreadAsync();
+        var statusBar = await VS.Services.GetStatusBarAsync();
+        statusBar.IsFrozen(out var frozen);
+        if (frozen == 0) {
+            statusBar.SetText(message);
+            statusBar.FreezeOutput(1);
+            await Task.Delay(duration);
+            statusBar.FreezeOutput(0);
+            statusBar.SetText(string.Empty);
+            statusBar.Clear();
+        }
+        else {
+            VS.MessageBox.Show(message);
         }
     }
 }

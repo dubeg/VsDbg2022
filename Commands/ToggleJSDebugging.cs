@@ -7,7 +7,7 @@ namespace VsDbg;
 [Command(PackageIds.ToggleJSDebugging)]
 internal sealed class ToggleJSDebugging : BaseCommand<ToggleJSDebugging> {
     protected override async Task ExecuteAsync(OleMenuCmdEventArgs e) {
-        await SettingsUtils.ToggleWithStatusAsync(
+        await Utils.ToggleWithStatusAsync(
             Package,
             SettingsScope.UserSettings,
             "Debugger",
