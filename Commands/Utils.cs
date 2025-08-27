@@ -7,10 +7,13 @@ using System.Threading.Tasks;
 using EnvDTE;
 using EnvDTE80;
 using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.Imaging;
+using Microsoft.VisualStudio.Imaging.Interop;
 using Microsoft.VisualStudio.Settings;
 using Microsoft.VisualStudio.Shell;
 using Microsoft.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio.Shell.Settings;
+using Microsoft.VisualStudio.TaskStatusCenter;
 using SettingsStoreExplorer;
 using MessageBox = Community.VisualStudio.Toolkit.MessageBox;
 
@@ -56,7 +59,7 @@ public static class Utils {
             await package.JoinableTaskFactory.SwitchToMainThreadAsync();
             var enabled = await ToggleAsync(package, scope, collectionPath, propertyName);
             // --
-            await package.SetStatusThenClearAsync($"{statusDisplayName}: {(enabled ? "enabled" : "disabled")}");
+            ShowSettingStatusThenClear(statusDisplayName, enabled);
         }
         catch (Exception ex) {
             await VS.MessageBox.ShowErrorAsync("Error", $"Failed to toggle option: {ex.Message}");
@@ -102,30 +105,21 @@ public static class Utils {
                 await roamingSettings.SetUInt32Async(collectionPath, propertyName, iEnabled);
             }
             // --
-            await package.SetStatusThenClearAsync($"{statusDisplayName}: {(enabled ? "enabled" : "disabled")}");
+            ShowSettingStatusThenClear(statusDisplayName, enabled);
         }
         catch (Exception ex) {
             await VS.MessageBox.ShowErrorAsync("Error", $"Failed to toggle option: {ex.Message}");
         }
     }
 
-    public static async Task SetStatusThenClearAsync(this AsyncPackage package, string message)
-    => await SetStatusThenClearAsync(package, message, TimeSpan.FromSeconds(1));
+    public static void ShowSettingStatusThenClear(string settingName, bool enabled)
+        => ShowMessageThenClear(
+            $"{settingName}: {(enabled ? "enabled" : "disabled")}", 
+            icon: enabled ? KnownMonikers.StatusOK : KnownMonikers.StatusNo, 
+            duration: TimeSpan.FromSeconds(0.5)
+        );
 
-    public static async Task SetStatusThenClearAsync(this AsyncPackage package, string message, TimeSpan duration) {
-        await package.JoinableTaskFactory.SwitchToMainThreadAsync();
-        var statusBar = await VS.Services.GetStatusBarAsync();
-        statusBar.IsFrozen(out var frozen);
-        if (frozen == 0) {
-            statusBar.SetText(message);
-            statusBar.FreezeOutput(1);
-            await Task.Delay(duration);
-            statusBar.FreezeOutput(0);
-            statusBar.SetText(string.Empty);
-            statusBar.Clear();
-        }
-        else {
-            VS.MessageBox.Show(message);
-        }
-    }
+    public static void ShowMessageThenClear(string message, ImageMoniker icon, TimeSpan duration) 
+        => DbgMessageBox.Show(message, icon, duration);
+
 }
