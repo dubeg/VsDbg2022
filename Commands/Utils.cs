@@ -110,7 +110,7 @@ public static class Utils {
     }
 
     public static async Task SetStatusThenClearAsync(this AsyncPackage package, string message)
-    => await SetStatusThenClearAsync(package, message, TimeSpan.FromSeconds(3));
+    => await SetStatusThenClearAsync(package, message, TimeSpan.FromSeconds(1));
 
     public static async Task SetStatusThenClearAsync(this AsyncPackage package, string message, TimeSpan duration) {
         await package.JoinableTaskFactory.SwitchToMainThreadAsync();
