@@ -75,41 +75,42 @@ public static class Utils {
     public static async Task ToggleRoamingWithStatusAsync(AsyncPackage package, string collectionPath, string propertyName, string statusDisplayName = "") {
         statusDisplayName ??= propertyName;
         try {
-            await package.JoinableTaskFactory.SwitchToMainThreadAsync();
-            var dte = await VS.GetServiceAsync<DTE, DTE2>();
-            var settingsManager = await VS.GetServiceAsync<SVsSettingsPersistenceManager, ISettingsManager>();
-            var roamingSettings = new RoamingSettingsStore(settingsManager);
-            var enabled = false;
-
-            var collectionParts = collectionPath.Split(['.'], StringSplitOptions.RemoveEmptyEntries);
-            if (collectionParts.Length > 1) {
-                throw new System.ArgumentException(nameof(collectionPath), $"Collection sub paths are not implemented");
-            }
-
-            var cols = roamingSettings.GetSubCollectionNames("").ToList();
-            var colExists = cols.Any(x => x == collectionPath);
-            if (!colExists) {
-                throw new ArgumentOutOfRangeException(nameof(collectionPath), $"Collection '{collectionPath}' doesn't exist.");
-            }
-
-            var props = roamingSettings.GetPropertyNames(collectionPath).ToList();
-            var propExists = props.Any(x => x == propertyName);
-            if (!propExists) {
-                await roamingSettings.SetUInt32Async(collectionPath, propertyName, 0);
-            }
-            else {
-                var iEnabled = roamingSettings.GetUint32(collectionPath, propertyName);
-                enabled = Convert.ToBoolean(iEnabled);
-                enabled = !enabled;
-                iEnabled = Convert.ToUInt32(enabled);
-                await roamingSettings.SetUInt32Async(collectionPath, propertyName, iEnabled);
-            }
-            // --
+            var enabled = await ToggleRoamingAsync(package, collectionPath, propertyName);
             ShowSettingStatusThenClear(statusDisplayName, enabled);
         }
         catch (Exception ex) {
             await VS.MessageBox.ShowErrorAsync("Error", $"Failed to toggle option: {ex.Message}");
         }
+    }
+
+    public static async Task<bool> ToggleRoamingAsync(AsyncPackage package, string collectionPath, string propertyName) {
+        await package.JoinableTaskFactory.SwitchToMainThreadAsync();
+        var dte = await VS.GetServiceAsync<DTE, DTE2>();
+        var settingsManager = await VS.GetServiceAsync<SVsSettingsPersistenceManager, ISettingsManager>();
+        var roamingSettings = new RoamingSettingsStore(settingsManager);
+        var enabled = false;
+        var props = roamingSettings.GetPropertyNames(collectionPath).ToList();
+        var propExists = props.Any(x => x == propertyName);
+        if (!propExists) {
+            await roamingSettings.SetUInt32Async(collectionPath, propertyName, 0);
+        }
+        else {
+            var iEnabled = roamingSettings.GetUint32(collectionPath, propertyName);
+            enabled = Convert.ToBoolean(iEnabled);
+            enabled = !enabled;
+            iEnabled = Convert.ToUInt32(enabled);
+            await roamingSettings.SetUInt32Async(collectionPath, propertyName, iEnabled);
+        }
+        return enabled;
+    }
+
+    public static async Task SetRoamingAsync(AsyncPackage package, string collectionPath, string propertyName, bool enabled) {
+        await package.JoinableTaskFactory.SwitchToMainThreadAsync();
+        var dte = await VS.GetServiceAsync<DTE, DTE2>();
+        var settingsManager = await VS.GetServiceAsync<SVsSettingsPersistenceManager, ISettingsManager>();
+        var roamingSettings = new RoamingSettingsStore(settingsManager);
+        var iEnabled = Convert.ToUInt32(enabled);
+        await roamingSettings.SetUInt32Async(collectionPath, propertyName, iEnabled);
     }
 
     public static void ShowSettingStatusThenClear(string settingName, bool enabled)
@@ -121,5 +122,6 @@ public static class Utils {
 
     public static void ShowMessageThenClear(string message, ImageMoniker icon, TimeSpan duration) 
         => DbgMessageBox.Show(message, icon, duration);
-
+    
+    
 }

@@ -62,6 +62,30 @@
 				</Strings>
 			</Button>
 
+			<Button guid="VsDbg" id="ToggleCSharpFadeOut" priority="0x0100" type="Button">
+				<Parent guid="VsDbg" id="MainCmdGroup" />
+				<Icon guid="ImageCatalogGuid" id="StatusInformation" />
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>CommandWellOnly</CommandFlag>
+				<Strings>
+					<ButtonText>Toggle C# Fade Out</ButtonText>
+					<LocCanonicalName>.VsDbg.ToggleCSharpFadeOut</LocCanonicalName>
+					<CanonicalName>.VsDbg.ToggleCSharpFadeOut</CanonicalName>
+				</Strings>
+			</Button>
+
+			<Button guid="VsDbg" id="ToggleCSharpInlineParameterNameHint" priority="0x0100" type="Button">
+				<Parent guid="VsDbg" id="MainCmdGroup" />
+				<Icon guid="ImageCatalogGuid" id="StatusInformation" />
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>CommandWellOnly</CommandFlag>
+				<Strings>
+					<ButtonText>Toggle C# Inline Parameter Name Hint</ButtonText>
+					<LocCanonicalName>.VsDbg.ToggleCSharpInlineParameterNameHint</LocCanonicalName>
+					<CanonicalName>.VsDbg.ToggleCSharpInlineParameterNameHint</CanonicalName>
+				</Strings>
+			</Button>
+
 		</Buttons>
 	</Commands>
 
@@ -72,6 +96,8 @@
 			<IDSymbol name="ToggleJustMyCode" value="0x0200" />
 			<IDSymbol name="ToggleXamlHotReload" value="0x0300" />
 			<IDSymbol name="ToggleCodeLens" value="0x0400" />
+			<IDSymbol name="ToggleCSharpFadeOut" value="0x0500" />
+			<IDSymbol name="ToggleCSharpInlineParameterNameHint" value="0x0600" />
 		</GuidSymbol>
 	</Symbols>
 </CommandTable>

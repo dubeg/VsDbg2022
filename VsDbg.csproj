@@ -46,6 +46,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Commands\ToggleCodeLens.cs" />
+    <Compile Include="Commands\ToggleCSharpInlineParameterNameHint.cs" />
+    <Compile Include="Commands\ToggleCSharpFadeOut.cs" />
     <Compile Include="Forms\DbgMessageBox.xaml.cs">
       <DependentUpon>DbgMessageBox.xaml</DependentUpon>
     </Compile>

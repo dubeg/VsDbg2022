@@ -12,7 +12,7 @@ namespace VsDbg
         public const string Name = "VsDbg";
         public const string Description = @"Misc commands for dbg (dubeg)";
         public const string Language = "en-US";
-        public const string Version = "1.6";
+        public const string Version = "1.7";
         public const string Author = "DUBEG";
         public const string Tags = "";
         public const bool IsPreview = false;

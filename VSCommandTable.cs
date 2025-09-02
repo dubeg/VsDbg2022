@@ -27,5 +27,7 @@ namespace VsDbg
         public const int ToggleJustMyCode = 0x0200;
         public const int ToggleXamlHotReload = 0x0300;
         public const int ToggleCodeLens = 0x0400;
+        public const int ToggleCSharpFadeOut = 0x0500;
+        public const int ToggleCSharpInlineParameterNameHint = 0x0600;
     }
 }
