@@ -28,7 +28,7 @@
 
 			<Button guid="VsDbg" id="ToggleJustMyCode" priority="0x0100" type="Button">
 				<Parent guid="VsDbg" id="MainCmdGroup" />
-				<Icon guid="ImageCatalogGuid" id="JustMyCode" />
+				<Icon guid="ImageCatalogGuid" id="StatusInformation" />
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<CommandFlag>CommandWellOnly</CommandFlag>
 				<Strings>
@@ -44,7 +44,7 @@
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<CommandFlag>CommandWellOnly</CommandFlag>
 				<Strings>
-					<ButtonText>Toggle Just My Code</ButtonText>
+					<ButtonText>Toggle XAML Hot Reload</ButtonText>
 					<LocCanonicalName>.VsDbg.ToggleXamlHotReload</LocCanonicalName>
 					<CanonicalName>.VsDbg.ToggleXamlHotReload</CanonicalName>
 				</Strings>
@@ -56,7 +56,7 @@
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<CommandFlag>CommandWellOnly</CommandFlag>
 				<Strings>
-					<ButtonText>Toggle Just My Code</ButtonText>
+					<ButtonText>Toggle Code Lens</ButtonText>
 					<LocCanonicalName>.VsDbg.ToggleCodeLens</LocCanonicalName>
 					<CanonicalName>.VsDbg.ToggleCodeLens</CanonicalName>
 				</Strings>
@@ -97,16 +97,40 @@
 					<CanonicalName>.VsDbg.ToggleAspnetIntegratedTerminal</CanonicalName>
 				</Strings>
 			</Button>
-			
+
 			<Button guid="VsDbg" id="RefactorRename" priority="0x0100" type="Button">
 				<Parent guid="VsDbg" id="MainCmdGroup" />
 				<Icon guid="ImageCatalogGuid" id="StatusInformation" />
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<CommandFlag>CommandWellOnly</CommandFlag>
 				<Strings>
-					<ButtonText>Toggle C# Inline Parameter Name Hint</ButtonText>
+					<ButtonText>Refactor: Rename (inline)</ButtonText>
 					<LocCanonicalName>.VsDbg.RefactorRename</LocCanonicalName>
 					<CanonicalName>.VsDbg.RefactorRename</CanonicalName>
+				</Strings>
+			</Button>
+
+			<Button guid="VsDbg" id="CloseWindow" priority="0x0100" type="Button">
+				<Parent guid="VsDbg" id="MainCmdGroup" />
+				<Icon guid="ImageCatalogGuid" id="StatusInformation" />
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>CommandWellOnly</CommandFlag>
+				<Strings>
+					<ButtonText>Window: Close window (any)</ButtonText>
+					<LocCanonicalName>.VsDbg.CloseWindow</LocCanonicalName>
+					<CanonicalName>.VsDbg.CloseWindow</CanonicalName>
+				</Strings>
+			</Button>
+
+			<Button guid="VsDbg" id="ToggleTerminal" priority="0x0100" type="Button">
+				<Parent guid="VsDbg" id="MainCmdGroup" />
+				<Icon guid="ImageCatalogGuid" id="StatusInformation" />
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>CommandWellOnly</CommandFlag>
+				<Strings>
+					<ButtonText>Window: toggle terminal</ButtonText>
+					<LocCanonicalName>.VsDbg.ToggleTerminal</LocCanonicalName>
+					<CanonicalName>.VsDbg.ToggleTerminal</CanonicalName>
 				</Strings>
 			</Button>
 
@@ -124,6 +148,8 @@
 			<IDSymbol name="ToggleCSharpInlineParameterNameHint" value="0x0600" />
 			<IDSymbol name="ToggleAspnetIntegratedTerminal" value="0x0700" />
 			<IDSymbol name="RefactorRename" value="0x0800" />
+			<IDSymbol name="CloseWindow" value="0x0900" />
+			<IDSymbol name="ToggleTerminal" value="0x0A00" />
 		</GuidSymbol>
 	</Symbols>
 </CommandTable>

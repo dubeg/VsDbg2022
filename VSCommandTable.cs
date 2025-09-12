@@ -31,5 +31,7 @@ namespace VsDbg
         public const int ToggleCSharpInlineParameterNameHint = 0x0600;
         public const int ToggleAspnetIntegratedTerminal = 0x0700;
         public const int RefactorRename = 0x0800;
+        public const int CloseWindow = 0x0900;
+        public const int ToggleTerminal = 0x0A00;
     }
 }
