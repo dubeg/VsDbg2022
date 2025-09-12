@@ -29,5 +29,7 @@ namespace VsDbg
         public const int ToggleCodeLens = 0x0400;
         public const int ToggleCSharpFadeOut = 0x0500;
         public const int ToggleCSharpInlineParameterNameHint = 0x0600;
+        public const int ToggleAspnetIntegratedTerminal = 0x0700;
+        public const int RefactorRename = 0x0800;
     }
 }
