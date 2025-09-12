@@ -7,3 +7,5 @@
 - Toggle C# Inline Parameter Name Hint: `VsDbg.ToggleCSharpInlineParameterNameHint`
 - Toggle AspNetCore Integrated Terminal: `VsDbg.ToggleAspnetIntegratedTerminal`
 - Execute `Refactor.Rename` without the popup (so that it is truely inline)
+- Toggle the terminal window: `VsDbg.ToggleTerminal`
+- Close window, whether it's a tool window or a document: `VsDbg.CloseWindow`
