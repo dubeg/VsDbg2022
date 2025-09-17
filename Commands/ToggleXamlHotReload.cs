@@ -19,7 +19,7 @@ internal sealed class ToggleXamlHotReload : BaseCommand<ToggleXamlHotReload> {
             iEnabled = (uint)(iEnabled == 1 ? 0 : 1);
             debugger.SetDebuggerOption(DEBUGGER_OPTIONS.Option_EnableXamlVisualDiagnostics, iEnabled);
             var enabled = iEnabled == 1;
-            Utils.ShowSettingStatusThenClear("XAML Hot Reload", enabled);
+            SettingsUtils.ShowSettingStatusThenClear("XAML Hot Reload", enabled);
             // -------------------------------------------------------------------
             // Using the code below doesn't take effect until Visual Studio restarts,
             // so I went ahead and use the code above.

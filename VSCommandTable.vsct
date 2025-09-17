@@ -134,6 +134,18 @@
 				</Strings>
 			</Button>
 
+			<Button guid="VsDbg" id="ToggleBottomDock" priority="0x0100" type="Button">
+				<Parent guid="VsDbg" id="MainCmdGroup" />
+				<Icon guid="ImageCatalogGuid" id="StatusInformation" />
+				<CommandFlag>IconIsMoniker</CommandFlag>
+				<CommandFlag>CommandWellOnly</CommandFlag>
+				<Strings>
+					<ButtonText>Window: toggle bottom dock</ButtonText>
+					<LocCanonicalName>.VsDbg.ToggleBottomDock</LocCanonicalName>
+					<CanonicalName>.VsDbg.ToggleBottomDock</CanonicalName>
+				</Strings>
+			</Button>
+
 		</Buttons>
 	</Commands>
 
@@ -150,6 +162,7 @@
 			<IDSymbol name="RefactorRename" value="0x0800" />
 			<IDSymbol name="CloseWindow" value="0x0900" />
 			<IDSymbol name="ToggleTerminal" value="0x0A00" />
+			<IDSymbol name="ToggleBottomDock" value="0x0B00" />
 		</GuidSymbol>
 	</Symbols>
 </CommandTable>

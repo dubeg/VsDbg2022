@@ -1,4 +1,11 @@
-﻿using Microsoft.VisualStudio.Shell.Interop;
+﻿using EnvDTE;
+using EnvDTE80;
+using Microsoft.VisualStudio;
+using Microsoft.VisualStudio.Shell.Interop;
+using System.Windows.Controls;
+using Microsoft.VisualStudio.Platform.WindowManagement;
+using System.Linq;
+using System.Diagnostics;
 
 namespace VsDbg.Commands;
 
@@ -11,12 +18,18 @@ internal sealed class ToggleTerminal: BaseCommand<ToggleTerminal> {
     protected override async Task ExecuteAsync(OleMenuCmdEventArgs e) { 
         await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
         try {
-            var uiShell = await VS.GetServiceAsync<SVsUIShell, IVsUIShell>();
             var terminalGuid = new Guid(WindowGuids.DeveloperPowerShell);
             var terminalWindow = await VS.Windows.FindWindowAsync(terminalGuid);
             var opened = terminalWindow is not null ? await terminalWindow.IsOnScreenAsync() : false;
-            if (opened) await terminalWindow.HideAsync();
-            else await VS.Windows.ShowToolWindowAsync(terminalGuid); // Or execute "View.Terminal"
+            if (opened) {
+                // await terminalWindow.HideAsync();
+                new PanelSwitcher(Package, Dock.Bottom).Switch();
+            }
+            else {
+                var windowFrame = await VS.Windows.ShowToolWindowAsync(terminalGuid);
+                var vsWindowFrame = windowFrame as IVsWindowFrame;
+                vsWindowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_FrameMode, VSFRAMEMODE.VSFM_Dock);
+            }
         }
         catch (Exception ex) {
             await VS.MessageBox.ShowErrorAsync("Error", $"Failed to toggle Terminal: {ex.Message}");

@@ -20,8 +20,7 @@ namespace VsDbg
     /// <summary>
     /// Helper class that encapsulates all CommandIDs uses across VS Package.
     /// </summary>
-    internal sealed partial class PackageIds
-    {
+    internal sealed partial class PackageIds {
         public const int MainCmdGroup = 0x0001;
         public const int ToggleJSDebugging = 0x0100;
         public const int ToggleJustMyCode = 0x0200;
@@ -33,5 +32,6 @@ namespace VsDbg
         public const int RefactorRename = 0x0800;
         public const int CloseWindow = 0x0900;
         public const int ToggleTerminal = 0x0A00;
+        public const int ToggleBottomDock = 0x0B00;
     }
 }

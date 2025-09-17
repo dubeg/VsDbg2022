@@ -12,7 +12,14 @@ namespace VsDbg;
 [ProvideMenuResource("Menus.ctmenu", 1)]
 [Guid(PackageGuids.VsDbgString)]
 public sealed class VsDbgPackage : ToolkitPackage {
+    /// <summary>
+    /// Major Visual Studio version number (eg. 16, 17, 18, ...)
+    /// </summary>
+    public int VsVersion { get; set; }
+
     protected override async Task InitializeAsync(CancellationToken cancellationToken, IProgress<ServiceProgressData> progress) {
         await this.RegisterCommandsAsync();
+        var version = await VS.Shell.GetVsVersionAsync();
+        VsVersion = version.Major;
     }
 }

@@ -10,9 +10,9 @@ namespace VsDbg
     {
         public const string Id = "VsDbg.875ccb25-6b86-4dc8-86fc-73ec714e2818";
         public const string Name = "VsDbg";
-        public const string Description = @"Misc commands for dbg (dubeg)";
+        public const string Description = @"Various commands for Visual Studio 2022 & 2026";
         public const string Language = "en-US";
-        public const string Version = "1.10";
+        public const string Version = "1.11";
         public const string Author = "DUBEG";
         public const string Tags = "";
         public const bool IsPreview = false;

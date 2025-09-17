@@ -1,4 +1,4 @@
-# Various commands for Visual Studio 2022
+# Various commands for Visual Studio 2022 & 2026
 - Toggle JavaScript Debugging: `Debug.ToggleJSDebugging`
 - Toggle XAML Hot Reload: `VsDbg.ToggleXamlHotReload`
 - Toggle Just My Code: `VsDbg.ToggleJustMyCode`

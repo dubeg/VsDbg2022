@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using EnvDTE;
 using EnvDTE80;
+using Microsoft.Internal.VisualStudio.Shell.Interop;
 using Microsoft.VisualStudio;
 using Microsoft.VisualStudio.Imaging;
 using Microsoft.VisualStudio.Imaging.Interop;
@@ -19,7 +20,7 @@ using MessageBox = Community.VisualStudio.Toolkit.MessageBox;
 
 namespace VsDbg.Commands;
 
-public static class Utils {
+public static class SettingsUtils {
 
     public static async Task SetBoolAsync(AsyncPackage package, SettingsScope scope, string collectionPath, string propertyName, bool enabled) {
         await package.JoinableTaskFactory.SwitchToMainThreadAsync();
@@ -122,6 +123,24 @@ public static class Utils {
 
     public static void ShowMessageThenClear(string message, ImageMoniker icon, TimeSpan duration) 
         => DbgMessageBox.Show(message, icon, duration);
-    
-    
+
+
+    public static async Task ToggleUnifiedSettingWithStatusAsync(AsyncPackage package, string settingName, string statusDisplayName = "") {
+        statusDisplayName ??= settingName;
+        try {
+            await package.JoinableTaskFactory.SwitchToMainThreadAsync();
+            var settingManager = await VS.GetRequiredServiceAsync<SVsUnifiedSettingsManager, IVsUnifiedSettingsManager>();
+            var reader = settingManager.GetReader();
+            var settingValue = (IVsUnifiedSettingValue)reader.GetValue(settingName, UnifiedSettingsValueType.Boolean, UnifiedSettingReadOptions.NoRequirements);
+            var enabled = (bool)settingValue.Value;
+            var writer = settingManager.GetWriter(nameof(ToggleJustMyCode));
+            enabled = !enabled;
+            var result = writer.EnqueueChange(settingName, enabled);
+            var commit = writer.Commit($"Toggled {statusDisplayName}");
+            ShowSettingStatusThenClear(statusDisplayName, enabled);
+        }
+        catch (Exception ex) {
+            await VS.MessageBox.ShowErrorAsync("Error", $"Failed to toggle option: {ex.Message}");
+        }
+    }
 }
