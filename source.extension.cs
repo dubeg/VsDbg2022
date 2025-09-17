@@ -12,7 +12,7 @@ namespace VsDbg
         public const string Name = "VsDbg";
         public const string Description = @"Various commands for Visual Studio 2022 & 2026";
         public const string Language = "en-US";
-        public const string Version = "1.11";
+        public const string Version = "1.12";
         public const string Author = "DUBEG";
         public const string Tags = "";
         public const bool IsPreview = false;
