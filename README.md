@@ -7,5 +7,14 @@
 - Toggle C# Inline Parameter Name Hint: `VsDbg.ToggleCSharpInlineParameterNameHint`
 - Toggle AspNetCore Integrated Terminal: `VsDbg.ToggleAspnetIntegratedTerminal`
 - Execute `Refactor.Rename` without the popup (so that it is truely inline)
-- Toggle the terminal window: `VsDbg.ToggleTerminal`
 - Close window, whether it's a tool window or a document: `VsDbg.CloseWindow`
+- Toggle the terminal window: `VsDbg.ToggleTerminal`
+- Toggle the bottom dock (windows docked/tabbed at the bottom): `VsDbg.ToggleBottomDock`
+
+
+## Credits
+- https://github.com/qalisander/SidePanelSwitcher
+	+ For the implementation of `ToggleBottomDock`.
+
+- https://github.com/pharring/SettingsStoreExplorer
+	+ To access & write roaming settings.
