@@ -116,7 +116,7 @@
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<CommandFlag>CommandWellOnly</CommandFlag>
 				<Strings>
-					<ButtonText>Window: Close window (any)</ButtonText>
+					<ButtonText>Close window (any)</ButtonText>
 					<LocCanonicalName>.VsDbg.CloseWindow</LocCanonicalName>
 					<CanonicalName>.VsDbg.CloseWindow</CanonicalName>
 				</Strings>
@@ -128,7 +128,7 @@
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<CommandFlag>CommandWellOnly</CommandFlag>
 				<Strings>
-					<ButtonText>Window: toggle terminal</ButtonText>
+					<ButtonText>Toggle terminal</ButtonText>
 					<LocCanonicalName>.VsDbg.ToggleTerminal</LocCanonicalName>
 					<CanonicalName>.VsDbg.ToggleTerminal</CanonicalName>
 				</Strings>
@@ -140,7 +140,7 @@
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<CommandFlag>CommandWellOnly</CommandFlag>
 				<Strings>
-					<ButtonText>Window: toggle bottom dock</ButtonText>
+					<ButtonText>Toggle bottom dock</ButtonText>
 					<LocCanonicalName>.VsDbg.ToggleBottomDock</LocCanonicalName>
 					<CanonicalName>.VsDbg.ToggleBottomDock</CanonicalName>
 				</Strings>
@@ -152,7 +152,7 @@
 				<CommandFlag>IconIsMoniker</CommandFlag>
 				<CommandFlag>CommandWellOnly</CommandFlag>
 				<Strings>
-					<ButtonText>Window: C# Interactive</ButtonText>
+					<ButtonText>Toggle C# Interactive</ButtonText>
 					<LocCanonicalName>.VsDbg.ToggleCSharpInteractive</LocCanonicalName>
 					<CanonicalName>.VsDbg.ToggleCSharpInteractive</CanonicalName>
 				</Strings>
