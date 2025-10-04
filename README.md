@@ -10,7 +10,7 @@
 - Close window, whether it's a tool window or a document: `VsDbg.CloseWindow`
 - Toggle the terminal window: `VsDbg.ToggleTerminal`
 - Toggle the bottom dock (windows docked/tabbed at the bottom): `VsDbg.ToggleBottomDock`
-
+- Toggle the C# Interactive window: `VsDbg.ToggleCSharpInteractive`
 
 ## Credits
 - https://github.com/qalisander/SidePanelSwitcher
