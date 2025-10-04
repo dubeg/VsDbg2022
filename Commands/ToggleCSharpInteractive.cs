@@ -11,7 +11,7 @@ using System.Diagnostics;
 namespace VsDbg.Commands;
 
 /// <summary>
-/// Toggle terminal window.
+/// Toggle C# Interactive window.
 /// </summary>
 [Command(PackageIds.ToggleCSharpInteractive)]
 internal sealed class ToggleCSharpInteractive : BaseCommand<ToggleCSharpInteractive> {
@@ -19,14 +19,14 @@ internal sealed class ToggleCSharpInteractive : BaseCommand<ToggleCSharpInteract
     protected override async Task ExecuteAsync(OleMenuCmdEventArgs e) {
         await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
         try {
-            var terminalGuid = new Guid(WindowGuidsEx.CSharpInteractive);
-            var terminalWindow = await VS.Windows.FindWindowAsync(terminalGuid);
-            var opened = terminalWindow is not null ? await terminalWindow.IsOnScreenAsync() : false;
+            var windowGuid = new Guid(WindowGuidsEx.CSharpInteractive);
+            var window = await VS.Windows.FindWindowAsync(windowGuid);
+            var opened = window is not null ? await window.IsOnScreenAsync() : false;
             if (opened) {
                 new PanelSwitcher(Package, Dock.Bottom).Switch();
             }
             else {
-                var windowFrame = await VS.Windows.ShowToolWindowAsync(terminalGuid);
+                var windowFrame = await VS.Windows.ShowToolWindowAsync(windowGuid);
                 var vsWindowFrame = windowFrame as IVsWindowFrame;
                 vsWindowFrame.SetProperty((int)__VSFPROPID.VSFPROPID_FrameMode, VSFRAMEMODE.VSFM_Dock);
             }
