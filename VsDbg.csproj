@@ -45,6 +45,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Commands\ToggleCSharpInteractive.cs" />
     <Compile Include="Commands\ToggleToggleBottomDock.cs" />
     <Compile Include="Commands\ToggleTerminal.cs" />
     <Compile Include="Commands\CloseWindow.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Commands\ToggleCSharpInlineParameterNameHint.cs" />
     <Compile Include="Commands\ToggleCSharpFadeOut.cs" />
     <Compile Include="Commands\ToggleAspnetIntegratedTerminal.cs" />
+    <Compile Include="Commands\WindowGuidsEx.cs" />
     <Compile Include="Forms\DbgMessageBox.xaml.cs">
       <DependentUpon>DbgMessageBox.xaml</DependentUpon>
     </Compile>

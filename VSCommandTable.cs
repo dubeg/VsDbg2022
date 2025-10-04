@@ -33,5 +33,6 @@ namespace VsDbg
         public const int CloseWindow = 0x0900;
         public const int ToggleTerminal = 0x0A00;
         public const int ToggleBottomDock = 0x0B00;
+        public const int ToggleCSharpInteractive = 0x0C00;
     }
 }
